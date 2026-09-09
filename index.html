@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <!-- Fundo escuro (Overlay) -->
+    <div id="fundo-escuro" class="fundo-escuro"></div>
+
     <header class="cabecalho">
         <h1>CineDicas</h1>
         <p>Seleção de filmes com letras grandes e leitura fácil</p>
@@ -16,6 +19,7 @@
     <main class="conteudo-principal">
 
         <article class="cartao-filme">
+            <button class="botao-fechar" aria-label="Fechar">&times;</button>
             <h2>1. O Oitavo Dia</h2>
             <div class="tag-genero">Drama / Comédia</div>
             <p class="sinopse">
@@ -28,6 +32,7 @@
         </article>
 
         <article class="cartao-filme">
+            <button class="botao-fechar" aria-label="Fechar">&times;</button>
             <h2>2. As Aventuras de Pi</h2>
             <div class="tag-genero">Aventura / Drama</div>
             <p class="sinopse">
@@ -44,6 +49,38 @@
     <footer class="rodape">
         <p>Para aumentar a tela no seu computador, segure a tecla <strong>CTRL</strong> e aperte a tecla <strong>+</strong></p>
     </footer>
+
+    <!-- Script simples para controlar o Modal -->
+    <script>
+        const cartoes = document.querySelectorAll('.cartao-filme');
+        const fundoEscuro = document.getElementById('fundo-escuro');
+
+        cartoes.forEach(cartao => {
+            cartao.addEventListener('click', (e) => {
+                // Se clicar no botão de fechar, fecha o modal
+                if (e.target.classList.contains('botao-fechar')) {
+                    fecharModal();
+                    e.stopPropagation();
+                    return;
+                }
+                
+                // Abre o card clicado
+                if (!cartao.classList.contains('ativo')) {
+                    fecharModal();
+                    cartao.classList.add('ativo');
+                    fundoEscuro.classList.add('ativo');
+                }
+            });
+        });
+
+        // Fechar ao clicar fora do card (no fundo escuro)
+        fundoEscuro.addEventListener('click', fecharModal);
+
+        function fecharModal() {
+            cartoes.forEach(c => c.classList.remove('ativo'));
+            fundoEscuro.classList.remove('ativo');
+        }
+    </script>
 
 </body>
 </html>
