@@ -7,16 +7,16 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 22px; /* Fonte maior para facilitar a leitura */
+    font-size: 22px;
     line-height: 1.6;
     background-color: #f4f4f9;
-    color: #111111; /* Alto contraste: texto quase preto sobre fundo claro */
+    color: #111111;
     padding: 20px;
 }
 
 /* Cabeçalho */
 .cabecalho {
-    background-color: #003366; /* Azul escuro */
+    background-color: #003366;
     color: #ffffff;
     text-align: center;
     padding: 30px 20px;
@@ -41,10 +41,18 @@ body {
 
 .cartao-filme {
     background-color: #ffffff;
-    border: 3px solid #003366; /* Borda espessa para separar claramente os blocos */
+    border: 3px solid #003366;
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 30px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cartao-filme:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cartao-filme h2 {
@@ -75,6 +83,63 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+/* Botão de Fechar */
+.botao-fechar {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #003366;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ===================================================
+   ESTILOS DO MODAL / SOBREPOSIÇÃO
+=================================================== */
+
+/* Fundo Escuro (Overlay) */
+.fundo-escuro {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75); /* Fundo escuro com opacidade */
+    z-index: 900;
+}
+
+.fundo-escuro.ativo {
+    display: block;
+}
+
+/* Card Destacado em Modal */
+.cartao-filme.ativo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000; /* Fica acima do fundo escuro */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+
+.cartao-filme.ativo .botao-fechar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Rodapé */
